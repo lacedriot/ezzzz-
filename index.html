@@ -15,10 +15,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+        /* --- GLOBAL --- */
         body { 
-            background: url("https://i.pinimg.com/736x/63/e4/4b/63e44b28204cf102df46188e5858d8a6.jpg") no-repeat center center fixed;
-            background-size: cover;
-
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -27,6 +25,7 @@
             overflow: hidden;
             -webkit-user-select: none;
             user-select: none;
+            transition: background 1s ease;
         }
 
         a {
@@ -34,38 +33,41 @@
             text-decoration: none; 
         }
 
-        .snowflake {
-            color: #738d76;
-            font-size: 1.5em;
-            text-shadow: 0 0 14px white;
+        /* --- SCREEN 1 (CLICK TO ENTER) --- */
+        #enter-screen {
             position: fixed;
-            top: -10%;
-            z-index: 999;
-            animation: snowflakes-fall 10s linear infinite, snowflakes-shake 3s ease-in-out infinite;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url("https://i.pinimg.com/736x/63/e4/4b/63e44b28204cf102df46188e5858d8a6.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            cursor: pointer;
+            z-index: 10000;
+            transition: opacity 0.8s ease;
         }
 
-        @keyframes snowflakes-fall { 0% { top: -10% } 100% { top: 100% } }
-        @keyframes snowflakes-shake { 0%, 100% { transform: translateX(0) } 50% { transform: translateX(80px) } }
-
-        .snowflake:nth-of-type(0) { left: 1%; animation-delay: 0s, 0s; }
-        .snowflake:nth-of-type(1) { left: 10%; animation-delay: 1s, 1s; }
-        .snowflake:nth-of-type(2) { left: 20%; animation-delay: 6s, .5s; }
-        .snowflake:nth-of-type(3) { left: 30%; animation-delay: 4s, 2s; }
-        .snowflake:nth-of-type(4) { left: 40%; animation-delay: 2s, 2s; }
-        .snowflake:nth-of-type(5) { left: 50%; animation-delay: 8s, 3s; }
-        .snowflake:nth-of-type(6) { left: 60%; animation-delay: 6s, 2s; }
-        .snowflake:nth-of-type(7) { left: 70%; animation-delay: 2.5s, 1s; }
-        .snowflake:nth-of-type(8) { left: 80%; animation-delay: 1s, 0s; }
-        .snowflake:nth-of-type(9) { left: 90%; animation-delay: 3s, 1.5s; }
-        .snowflake:nth-of-type(10) { left: 25%; animation-delay: 2s, 0s; }
-        .snowflake:nth-of-type(11) { left: 65%; animation-delay: 4s, 2.5s; }
-
-        #backdrop {
+        /* --- SCREEN 2 (PROFILE CARD) --- */
+        #profile-screen {
             position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #000;
-            display: flex; align-items: center; justify-content: center;
-            z-index: 10000; cursor: pointer;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url("https://i.pinimg.com/736x/63/e4/4b/63e44b28204cf102df46188e5858d8a6.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: none;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
         }
 
         .app-card {
@@ -92,70 +94,56 @@
             line-height: 1.6;
         }
 
-        .content-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            text-align: center;
+        /* Snowflakes */
+        .snowflake {
+            color: #738d76;
+            font-size: 1.5em;
+            text-shadow: 0 0 14px white;
+            position: fixed;
+            top: -10%;
+            z-index: 999;
+            animation: snowflakes-fall 10s linear infinite, snowflakes-shake 3s ease-in-out infinite;
         }
+
+        @keyframes snowflakes-fall { 0% { top: -10% } 100% { top: 100% } }
+        @keyframes snowflakes-shake { 0%, 100% { transform: translateX(0) } 50% { transform: translateX(80px) } }
     </style>
 </head>
 <body>
 
-    <div id="backdrop" onclick="startPlayback()">
-        <div style="font-size: 30px;">click to proceed</div>
+    <!-- SCREEN 1 -->
+    <div id="enter-screen" onclick="enterSite()">
+        click to enter...
     </div>
 
-    <div class="snowflakes">
-        <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
-        <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
-        <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
-        <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
-    </div>
+    <!-- SCREEN 2 -->
+    <div id="profile-screen">
+        <div class="snowflakes">
+            <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
+            <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
+            <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
+            <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
+        </div>
 
-    <div class="content-container">
+        <div class="content-container">
+            <div class="app-card">
+                <img src="https://i.scdn.co/image/ab67616d0000b2732ddecda1ed612a0159a53e7f">
 
-        <div class="app-card">
-            <img src="https://i.scdn.co/image/ab67616d0000b2732ddecda1ed612a0159a53e7f" alt="">
-
-            <pre>
+                <pre>
 <a href="https://discord.gg" target="_blank"> RIOT </a>
 
-<a href="https://roblox.com" target="_blank">  roblox </a> 
+<a href="https://roblox.com" target="_blank"> roblox </a> 
 <a href="https://steamcommunity.com" target="_blank"> steam </a>
 <a href="https://rockstargames.com" target="_blank"> rockstar Social Club </a>
 <a href="https://spotify.com" target="_blank"> spotify </a>
-            </pre>
+                </pre>
+            </div>
         </div>
-
     </div>
 
     <script>
+        /* MUSIC SYSTEM */
         var songs = [
             "worry (Slowed).mp3",
             "starly (Slowed) (1).mp3", 
-            "akiaura, LONOWN - Deathwish.mp3"
-        ];
-
-        var audioPlayer = new Audio();
-        audioPlayer.volume = 0.1;
-
-        function playRandomSong() {
-            var randomIndex = Math.floor(Math.random() * songs.length);
-            audioPlayer.src = songs[randomIndex];
-            audioPlayer.play();
-        }
-
-        function startPlayback() {
-            document.getElementById('backdrop').style.display = 'none';
-            playRandomSong();
-        }
-
-        audioPlayer.onended = function() {
-            playRandomSong();
-        };
-    </script>
-
-</body>
+            "akiaura, LONOWN
