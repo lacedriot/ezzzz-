@@ -16,6 +16,7 @@
     <title>RIOT</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <style>
         body { 
             background-color: #000;
@@ -70,6 +71,31 @@
             z-index: 10000; cursor: pointer;
         }
 
+        /* NEW APP BUBBLE CARD */
+        .app-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 20px rgba(255,255,255,0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .app-card img {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        .app-card pre {
+            margin: 0;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
         .content-container {
             display: flex;
             flex-direction: column;
@@ -94,23 +120,24 @@
     </div>
 
     <div class="content-container">
-        <!-- UPDATED IMAGE: Make sure 'riot-logo.jpg' is in your folder -->
-        <img src="riot-logo.jpg" width="50" style="margin-bottom: 20px;">
-        
-        <pre>
+
+        <div class="app-card">
+            <!-- Make sure this file exists in the same folder -->
+            <img src="riot-logo.jpg" alt="RIOT Logo">
+
+            <pre>
 <a href="https://discord.gg" target="_blank"> RIOT </a>
 
 <a href="https://roblox.com" target="_blank"> roblox </a> 
-<a href="https://steamcommunity.com" target="_blank">steam </a>
-<a href="https://rockstargames.com" target="_blank">rockstar Social Club </a>
+<a href="https://steamcommunity.com" target="_blank"> steam </a>
+<a href="https://rockstargames.com" target="_blank"> rockstar Social Club </a>
 <a href="https://spotify.com" target="_blank"> spotify </a>
-        </pre>
+            </pre>
+        </div>
+
     </div>
 
     <script>
-        // --- YOUR SONG LIST ---
-        // Add as many songs as you want here. 
-        // Make sure the filenames are EXACT (case sensitive).
         var songs = [
             "worry (Slowed).mp3",
             "starly (Slowed) (1).mp3", 
@@ -121,7 +148,6 @@
         audioPlayer.volume = 0.1;
 
         function playRandomSong() {
-            // Pick a random number between 0 and the length of your song list
             var randomIndex = Math.floor(Math.random() * songs.length);
             audioPlayer.src = songs[randomIndex];
             audioPlayer.play();
@@ -132,10 +158,10 @@
             playRandomSong();
         }
 
-        // When the current song ends, automatically play a new one
         audioPlayer.onended = function() {
             playRandomSong();
         };
     </script>
+
 </body>
 </html>
