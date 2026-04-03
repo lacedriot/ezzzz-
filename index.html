@@ -268,15 +268,157 @@
 
         <div class="content-container">
             <div class="app-card">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RIOT</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-                <!-- TYPING NAME -->
-                <a href="https://discord.com/channels/@me" target="_blank">
-                    <div class="riot-name">RIOT</div>
-                </a>
+    <style>
+        body { 
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            font-family: Sans-Serif;
+            color: #FFF;
+            overflow: hidden;
+            -webkit-user-select: none;
+            user-select: none;
+            transition: background 1s ease;
+        }
+
+        a {
+            color: #FFF;
+            text-decoration: none; 
+        }
+
+        /* CLICK TO ENTER SCREEN */
+        #enter-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url("https://i.pinimg.com/736x/63/e4/4b/63e44b28204cf102df46188e5858d8a6.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            cursor: pointer;
+            z-index: 10000;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        /* PROFILE SCREEN */
+        #profile-screen {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: url("https://i.pinimg.com/736x/63/e4/4b/63e44b28204cf102df46188e5858d8a6.jpg") no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            opacity: 0;
+            transition: opacity 1s ease;
+        }
+
+        .content-container {
+            margin: auto;
+            text-align: center;
+        }
+
+        .app-card {
+            background: rgba(255, 255, 255, 0.08);
+            padding: 25px 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 20px rgba(255,255,255,0.15);
+            display: inline-block;
+        }
+
+        .app-card img.profile {
+            width: 70px;
+            height: 70px;
+            object-fit: contain;
+            margin-bottom: 15px;
+        }
+
+        /* ICON ROW — PERFECT ALIGNMENT */
+        .icon-row {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin-top: 18px;
+        }
+
+        .icon-row a {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-row img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 6px rgba(255,255,255,0.4));
+            transition: transform 0.2s ease;
+        }
+
+        .icon-row img:hover {
+            transform: scale(1.2);
+        }
+
+        /* SNOWFLAKES FIXED ACROSS SCREEN */
+        .snowflake {
+            color: #738d76;
+            font-size: 1.5em;
+            text-shadow: 0 0 14px white;
+            position: fixed;
+            top: -10%;
+            z-index: 999;
+            animation: snowflakes-fall 10s linear infinite, snowflakes-shake 3s ease-in-out infinite;
+        }
+
+        @keyframes snowflakes-fall { 0% { top: -10% } 100% { top: 100% } }
+        @keyframes snowflakes-shake { 0%, 100% { transform: translateX(0) } 50% { transform: translateX(80px) } }
+
+        .snowflake:nth-of-type(1) { left: 5%; animation-delay: 0s; }
+        .snowflake:nth-of-type(2) { left: 15%; animation-delay: 2s; }
+        .snowflake:nth-of-type(3) { left: 25%; animation-delay: 4s; }
+        .snowflake:nth-of-type(4) { left: 35%; animation-delay: 1s; }
+        .snowflake:nth-of-type(5) { left: 45%; animation-delay: 3s; }
+        .snowflake:nth-of-type(6) { left: 55%; animation-delay: 5s; }
+        .snowflake:nth-of-type(7) { left: 65%; animation-delay: 1.5s; }
+        .snowflake:nth-of-type(8) { left: 75%; animation-delay: 2.5s; }
+        .snowflake:nth-of-type(9) { left: 85%; animation-delay: 4.5s; }
+        .snowflake:nth-of-type(10) { left: 95%; animation-delay: 3.5s; }
+    </style>
+</head>
+<body>
+
+    <!-- CLICK TO ENTER -->
+    <div id="enter-screen" onclick="enterSite()">
+        click to enter...
+    </div>
+
+    <!-- PROFILE SCREEN -->
+    <div id="profile-screen">
+        <div class="snowflakes">
+            <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
+            <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
+            <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
+            <div class="snowflake">$</div>
+        </div>
+
+        <div class="content-container">
+            <div class="app-card">
 
                 <img class="profile" src="https://i.scdn.co/image/ab67616d0000b2732ddecda1ed612a0159a53e7f">
 
-                <!-- ICONS -->
+                <!-- ICONS FIXED + ALIGNED -->
                 <div class="icon-row">
 
                     <a href="https://roblox.com" target="_blank">
@@ -322,7 +464,7 @@
             playRandomSong();
         };
 
-        /* FADE TRANSITION — NO WHITE FLASH */
+        /* FADE TRANSITION */
         function enterSite() {
             let enter = document.getElementById("enter-screen");
             let profile = document.getElementById("profile-screen");
@@ -333,7 +475,7 @@
                 enter.style.display = "none";
                 profile.style.opacity = "1";
                 playRandomSong();
-            }, 1200);
+            }, 1000);
         }
     </script>
 
