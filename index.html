@@ -82,7 +82,7 @@
 </head>
 <body>
 
-    <div id="backdrop" onclick="start()">
+    <div id="backdrop" onclick="startPlayback()">
         <div style="font-size: 30px;">click to proceed</div>
     </div>
 
@@ -94,31 +94,48 @@
     </div>
 
     <div class="content-container">
+        <!-- UPDATED IMAGE: Make sure 'riot-logo.jpg' is in your folder -->
         <img src="riot-logo.jpg" width="50" style="margin-bottom: 20px;">
+        
         <pre>
-<a href="https://discord.gg/user/id/" target="_blank">RIOT</a>
-<a href="https://roblox.com" target="_blank">roblox</a>
-          
-<a href="https://steamcommunity.com" target="_blank">steam</a>
-          
-<a href="https://rockstargames.com" target="_blank">rockstar Social Club</a>
-          
-<a href="https://spotify.com" target="_blank">spotify </a>
+<a href="https://discord.gg" target="_blank"> RIOT </a>
+
+<a href="https://roblox.com" target="_blank"> roblox </a> 
+<a href="https://steamcommunity.com" target="_blank">steam </a>
+<a href="https://rockstargames.com" target="_blank">rockstar Social Club </a>
+<a href="https://spotify.com" target="_blank"> spotify </a>
         </pre>
     </div>
 
     <script>
-        function start() {
-            document.getElementById('backdrop').style.display = 'none';
-            var audio = new Audio("worry (Slowed).mp3");
-            audio.volume = 0.1;
-            audio.loop = true;
-            audio.play();
+        // --- YOUR SONG LIST ---
+        // Add as many songs as you want here. 
+        // Make sure the filenames are EXACT (case sensitive).
+        var songs = [
+            "worry (Slowed).mp3",
+            "starly (Slowed) (1).mp3", 
+            "akiaura, LONOWN - Deathwish.mp3"
+        ];
+
+        var audioPlayer = new Audio();
+        audioPlayer.volume = 0.1;
+
+        function playRandomSong() {
+            // Pick a random number between 0 and the length of your song list
+            var randomIndex = Math.floor(Math.random() * songs.length);
+            audioPlayer.src = songs[randomIndex];
+            audioPlayer.play();
         }
+
+        function startPlayback() {
+            document.getElementById('backdrop').style.display = 'none';
+            playRandomSong();
+        }
+
+        // When the current song ends, automatically play a new one
+        audioPlayer.onended = function() {
+            playRandomSong();
+        };
     </script>
 </body>
 </html>
-
-   
-
-    
