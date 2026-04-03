@@ -146,4 +146,41 @@
         var songs = [
             "worry (Slowed).mp3",
             "starly (Slowed) (1).mp3", 
-            "akiaura, LONOWN
+            "akiaura, LONOWN - Deathwish.mp3"
+        ];
+
+        var audioPlayer = new Audio();
+        audioPlayer.volume = 0.1;
+
+        function playRandomSong() {
+            var randomIndex = Math.floor(Math.random() * songs.length);
+            audioPlayer.src = songs[randomIndex];
+            audioPlayer.play();
+        }
+
+        audioPlayer.onended = function() {
+            playRandomSong();
+        };
+
+        /* ENTER TRANSITION */
+        function enterSite() {
+            let enter = document.getElementById("enter-screen");
+            let profile = document.getElementById("profile-screen");
+
+            enter.style.opacity = "0";
+
+            setTimeout(() => {
+                enter.style.display = "none";
+                profile.style.display = "block";
+
+                setTimeout(() => {
+                    profile.style.opacity = "1";
+                }, 50);
+
+                playRandomSong();
+            }, 800);
+        }
+    </script>
+
+</body>
+</html>
