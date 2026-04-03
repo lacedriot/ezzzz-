@@ -15,7 +15,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        /* --- GLOBAL --- */
         body { 
             margin: 0;
             padding: 0;
@@ -33,7 +32,7 @@
             text-decoration: none; 
         }
 
-        /* --- SCREEN 1 (CLICK TO ENTER) --- */
+        /* CLICK TO ENTER SCREEN */
         #enter-screen {
             position: fixed;
             top: 0; left: 0;
@@ -46,27 +45,24 @@
             font-size: 32px;
             cursor: pointer;
             z-index: 10000;
-            transition: opacity 0.8s ease;
+            opacity: 1;
+            transition: opacity 1s ease;
         }
 
-        /* --- SCREEN 2 (PROFILE CARD) --- */
+        /* PROFILE SCREEN */
         #profile-screen {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             background: url("https://i.pinimg.com/736x/63/e4/4b/63e44b28204cf102df46188e5858d8a6.jpg") no-repeat center center fixed;
             background-size: cover;
-            display: none;
+            display: flex;
             opacity: 0;
             transition: opacity 1s ease;
         }
 
         .content-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
+            margin: auto;
             text-align: center;
         }
 
@@ -76,9 +72,7 @@
             border-radius: 20px;
             backdrop-filter: blur(8px);
             box-shadow: 0 0 20px rgba(255,255,255,0.15);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: inline-block;
         }
 
         .app-card img {
@@ -94,7 +88,7 @@
             line-height: 1.6;
         }
 
-        /* Snowflakes */
+        /* SNOWFLAKES FIXED ACROSS SCREEN */
         .snowflake {
             color: #738d76;
             font-size: 1.5em;
@@ -107,22 +101,34 @@
 
         @keyframes snowflakes-fall { 0% { top: -10% } 100% { top: 100% } }
         @keyframes snowflakes-shake { 0%, 100% { transform: translateX(0) } 50% { transform: translateX(80px) } }
+
+        /* Spread evenly across the screen */
+        .snowflake:nth-of-type(1) { left: 5%; animation-delay: 0s; }
+        .snowflake:nth-of-type(2) { left: 15%; animation-delay: 2s; }
+        .snowflake:nth-of-type(3) { left: 25%; animation-delay: 4s; }
+        .snowflake:nth-of-type(4) { left: 35%; animation-delay: 1s; }
+        .snowflake:nth-of-type(5) { left: 45%; animation-delay: 3s; }
+        .snowflake:nth-of-type(6) { left: 55%; animation-delay: 5s; }
+        .snowflake:nth-of-type(7) { left: 65%; animation-delay: 1.5s; }
+        .snowflake:nth-of-type(8) { left: 75%; animation-delay: 2.5s; }
+        .snowflake:nth-of-type(9) { left: 85%; animation-delay: 4.5s; }
+        .snowflake:nth-of-type(10) { left: 95%; animation-delay: 3.5s; }
     </style>
 </head>
 <body>
 
-    <!-- SCREEN 1 -->
+    <!-- CLICK TO ENTER -->
     <div id="enter-screen" onclick="enterSite()">
         click to enter...
     </div>
 
-    <!-- SCREEN 2 -->
+    <!-- PROFILE SCREEN -->
     <div id="profile-screen">
         <div class="snowflakes">
             <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
             <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
             <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
-            <div class="snowflake">$</div><div class="snowflake">$</div><div class="snowflake">$</div>
+            <div class="snowflake">$</div>
         </div>
 
         <div class="content-container">
@@ -142,7 +148,7 @@
     </div>
 
     <script>
-        /* MUSIC SYSTEM */
+        /* MUSIC */
         var songs = [
             "worry (Slowed).mp3",
             "starly (Slowed) (1).mp3", 
@@ -162,7 +168,7 @@
             playRandomSong();
         };
 
-        /* ENTER TRANSITION */
+        /* FADE TRANSITION */
         function enterSite() {
             let enter = document.getElementById("enter-screen");
             let profile = document.getElementById("profile-screen");
@@ -171,16 +177,12 @@
 
             setTimeout(() => {
                 enter.style.display = "none";
-                profile.style.display = "block";
-
-                setTimeout(() => {
-                    profile.style.opacity = "1";
-                }, 50);
-
+                profile.style.opacity = "1";
                 playRandomSong();
-            }, 800);
+            }, 1000);
         }
     </script>
 
 </body>
 </html>
+
